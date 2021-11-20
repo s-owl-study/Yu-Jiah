@@ -24,6 +24,63 @@
 - 다만, 배열의 **중간**에 위치한 객체를 추가하거나 삭제하는 경우 **다른 데이터의 위치를 이동시켜 줘야 하기 때문에** 다루는 데이터의 개수가 **많을수록 작업시간이 오래 걸린다는 것이다.**
 ![](https://images.velog.io/images/cil05265/post/3c20a040-2d07-4df7-8d22-67b504fcbdbf/KakaoTalk_Photo_2021-11-21-02-53-45.jpeg)
 
+
+## ArrayList를 사용한 예제
+
+```java
+import java.util.*;
+class Ex11_1 {
+	public static void main(String[] args) {
+		ArrayList list1 = new ArrayList(10);
+		list1.add(new Integer(5));
+		list1.add(new Integer(4));
+		list1.add(new Integer(2));
+		list1.add(new Integer(0));
+		list1.add(new Integer(1));
+		list1.add(new Integer(3));
+
+		ArrayList list2 = new ArrayList(list1.subList(1,4)); 
+		print(list1, list2);
+
+		Collections.sort(list1);	// list1과 list2를 정렬한다.
+		Collections.sort(list2);	// Collections.sort(List l)
+		print(list1, list2);
+
+		System.out.println("list1.containsAll(list2):"
+                                               + list1.containsAll(list2));
+
+		list2.add("B");
+		list2.add("C");
+		list2.add(3, "A");
+		print(list1, list2);
+
+		list2.set(3, "AA");
+		print(list1, list2);
+
+		// list1에서 list2와 겹치는 부분만 남기고 나머지는 삭제한다.
+		System.out.println("list1.retainAll(list2):" + list1.retainAll(list2));
+
+		print(list1, list2);
+
+		//  list2에서 list1에 포함된 객체들을 삭제한다.
+		for(int i= list2.size()-1; i >= 0; i--) {
+			if(list1.contains(list2.get(i)))
+				list2.remove(i);
+		}
+		print(list1, list2);
+	} // main의 끝
+
+	static void print(ArrayList list1, ArrayList list2) {
+		System.out.println("list1:"+list1);
+		System.out.println("list2:"+list2);
+		System.out.println();		
+	}
+} // class
+
+```
+
+
+
 ### 5. LinkedList
 - LinkedList는 배열의 단점을 보완하기 위해 만들어진 자료구조이다.
 
