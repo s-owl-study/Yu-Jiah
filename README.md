@@ -9,3 +9,8 @@
 | 공부 내용 |
 |----|
 | [2주차 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/blob/main/2ndweek/211120%20%EC%A0%95%EB%A6%AC%20%ED%8C%8C%EC%9D%BC.md) |
+
+### 3rdWeek
+| 공부 내용 |
+|----|
+| [2주차 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/tree/main/3rdweek) |
