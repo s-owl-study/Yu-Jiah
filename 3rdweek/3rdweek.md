@@ -79,6 +79,9 @@ class Ex11_1 {
 
 ```
 
+- 출력화면
+![](https://images.velog.io/images/cil05265/post/47f4dd77-943a-4f71-9c8c-7cad4044ab6e/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202021-11-21%203.44.26.png)
+
 
 
 ### 5. LinkedList
