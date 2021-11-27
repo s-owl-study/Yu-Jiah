@@ -13,4 +13,4 @@
 ### 3rdWeek
 | 공부 내용 |
 |----|
-| [3주차 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/tree/main/3rdweek) |
+| [3주차 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/blob/main/3rdweek/3rdweek.md) |
