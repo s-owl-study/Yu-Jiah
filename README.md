@@ -14,3 +14,9 @@
 | 공부 내용 |
 |----|
 | [3주차 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/blob/main/3rdweek/3rdweek.md) |
+
+### 4thweek
+| 공부 내용 |
+|----|
+| [4주차 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/blob/main/4thweek/4thweek.md) |
+
