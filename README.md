@@ -20,3 +20,7 @@
 |----|
 | [4주차 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/blob/main/4thweek/4thweek.md) |
 
+### 211218
+| 공부 내용 |
+|----|
+| [12월 18일 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/blob/main/211218/211218.md) |
