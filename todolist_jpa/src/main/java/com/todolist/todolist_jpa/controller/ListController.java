@@ -22,28 +22,28 @@ public class ListController {
     ListServiceImpl listService;
 
     @PostMapping
-    public ResponseEntity<ListDto> create(@RequestBody ListDto listDto) {
-        if (ObjectUtils.isEmpty(listDto.getList_id())) {
+    public ResponseEntity<ListEntity> create(@RequestBody ListDto listDto) {
+        if (ObjectUtils.isEmpty(listDto.getListId())) {
             return ResponseEntity.badRequest().build();
         }
 
-        if (ObjectUtils.isEmpty(listDto.getList_title())) {
-            listDto.setList_title("");
+        if (ObjectUtils.isEmpty(listDto.getListTitle())) {
+            listDto.setListTitle("");
         }
 
-        if (ObjectUtils.isEmpty(listDto.getList_Completed())) {
-            listDto.setList_Completed("");
+        if (ObjectUtils.isEmpty(listDto.getListCompleted())) {
+            listDto.setListCompleted("");
         }
 
         ListEntity result = this.listService.add(listDto);
 
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ListDto> readOne(@PathVariable Long List_id) {
-        ListEntity result = this.listService.searchById(List_id);
-        return ResponseEntity.ok(response);
+    public ResponseEntity<ListEntity> readOne(@PathVariable Long listId) {
+        ListEntity result = this.listService.searchById(listId);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping
@@ -58,16 +58,16 @@ public class ListController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<ListDto> update(@PathVariable Long List_id, @RequestBody ListDto listDto) {
-        ListEntity result = this.listService.updateById(List_id, listDto);
+    public ResponseEntity<ListDto> update(@PathVariable Long listId, @RequestBody ListDto listDto) {
+        ListEntity result = this.listService.updateById(listId, listDto);
         ListDto response = new ListDto(result);
 
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> removeOne(@PathVariable Long List_id) {
-        this.listService.deleteById(List_id);
+    public ResponseEntity<?> removeOne(@PathVariable Long listId) {
+        this.listService.deleteById(listId);
         return ResponseEntity.ok().build();
     }
 

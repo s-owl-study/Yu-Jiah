@@ -21,16 +21,16 @@ public class ListServiceImpl implements ListService {
     @Override
     public ListEntity add(ListDto listDto) {
         ListEntity listEntity = ListEntity.builder()
-                .List_id(listDto.getList_id())
-                .List_title(listDto.getList_title())
-                .List_completed(listDto.getList_completed())
+                .listId(listDto.getListId())
+                .listTitle(listDto.getListTitle())
+                .listCompleted(listDto.getListCompleted())
                 .build();
         return this.listRepository.save(listEntity);
     }
 
     @Override
-    public ListEntity searchById(Long List_id) {
-        return this.listRepository.findById(List_id)
+    public ListEntity searchById(Long listId) {
+        return this.listRepository.findById(listId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
@@ -40,27 +40,27 @@ public class ListServiceImpl implements ListService {
     }
 
     @Override
-    public ListEntity updateById(Long List_id, ListDto listDto) {
-        ListEntity listEntity = this.searchById(List_id);
+    public ListEntity updateById(Long listId, ListDto listDto) {
+        ListEntity listEntity = this.searchById(listId);
 
-        if (listDto.getList_id() != null) {
-            listEntity.setList_id(listDto.getList_id());
+        if (listDto.getListId() != null) {
+            listEntity.setListId(listDto.getListId());
         }
 
-        if (listDto.getlist_title() != null) {
-            listEntity.setList_title(listDto.getList_title());
+        if (listDto.getListTitle() != null) {
+            listEntity.setListTitle(listDto.getListTitle());
         }
 
-        if (listDto.getList_completed() != null) {
-            listEntity.setList_completed(listDto.getList_completed());
+        if (listDto.getListCompleted() != null) {
+            listEntity.setListCompleted(listDto.getListCompleted());
         }
 
         return this.listRepository.save(listEntity);
     }
 
     @Override
-    public void deleteById(Long List_id) {
-        this.listRepository.deleteById(List_id);
+    public void deleteById(Long listId) {
+        this.listRepository.deleteById(listId);
     }
 
     @Override
