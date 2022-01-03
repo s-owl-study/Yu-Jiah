@@ -25,7 +25,7 @@
 |----|
 | [12월 18일 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/blob/main/211218/211218.md) |
 
-### 211225
+### 투두리스트 만들기
 | 공부 내용 |
 |----|
-| [12월 25일 과제 정리 자료](https://github.com/s-owl-study/Yu-Jiah/tree/main/211225/todolist_jpa) |
+| [투두리스트 만들기](https://github.com/s-owl-study/Yu-Jiah/tree/main/todolist_jpa) |
