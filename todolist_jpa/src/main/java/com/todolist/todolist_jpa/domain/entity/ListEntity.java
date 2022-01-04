@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "listEntity")
 @Getter
 @Setter
 public class ListEntity { //list만 쓰면 위험함

@@ -16,8 +16,7 @@ public class ListDto {
         this.listId = listEntity.getListId();
         this.listCompleted = listEntity.getListCompleted();
         this.listTitle = listEntity.getListTitle();
-        this.url = "http://localhost:8090/" + this.listId;
+        this.url = "http://localhost:9090/" + this.listId;
 
     }
-
 }
