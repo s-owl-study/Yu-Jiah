@@ -1,22 +1,23 @@
 package com.todolist.todolist_jpa.dto;
 
 import com.todolist.todolist_jpa.domain.entity.ListEntity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@Builder
 public class ListDto {
     private Long listId;
-    private String listCompleted;
+    private boolean listCompleted;
     private String listTitle;
-    private String url;
 
     public ListDto(ListEntity listEntity) {
         this.listId = listEntity.getListId();
-        this.listCompleted = listEntity.getListCompleted();
+        this.listCompleted = listEntity.isListCompleted();
         this.listTitle = listEntity.getListTitle();
-        this.url = "http://localhost:9090/" + this.listId;
-
     }
 }

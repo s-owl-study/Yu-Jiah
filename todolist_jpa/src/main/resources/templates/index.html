@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Font Awesome -->
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+  />
+  <!-- Google Fonts -->
+  <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+  />
+  <!-- MDB -->
+  <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
+      rel="stylesheet"
+  />
+  <!-- MDB -->
+  <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"
+  ></script>
+</head>
+<body>
+<section class="vh-100" style="background-color: #e2d5de;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-5">
+
+            <h6 class="mb-3">Awesome Todo List</h6>
+
+            <form class="d-flex justify-content-center align-items-center mb-4">
+              <div class="form-outline flex-fill">
+                <input type="text" id="form3" class="form-control form-control-lg" />
+                <label class="form-label" for="form3">What do you need to do today?</label>
+              </div>
+            </form>
+            <button onclick="sendToServer()" class="btn btn-primary btn-lg ms-2">Add</button>
+
+            <ul class="list-group mb-0" id="list">
+              <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                  Cras justo odio
+                </div>
+                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+              <li class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
+                  <s>Dapibus ac facilisis in</s>
+                </div>
+                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+              <li class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                  Morbi leo risus
+                </div>
+                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+              <li class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                  Porta ac consectetur ac
+                </div>
+                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+              <li class="list-group-item d-flex d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-0">
+                <div class="d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." checked />
+                  Vestibulum at eros
+                </div>
+                <a href="#!" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2">
+                <div class="d-flex align-items-center">
+                  <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                  Morbi leo risus
+                </div>
+                <a href="" data-mdb-toggle="tooltip" title="Remove item">
+                  <i class="fas fa-times text-primary"></i>
+                </a>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+
+<script>
+
+  const list = document.getElementById('list');
+  const clickAddBtn = () => {
+    const li = document.createElement('li');
+    li.className='list-group-item d-flex justify-content-between align-items-center border-start-0 border-top-0 border-end-0 border-bottom rounded-0 mb-2';
+
+    const div = document.createElement('div');
+    div.className = 'd-flex align-items-center';
+
+    const input = document.createElement('input');
+    input.className = 'form-check-input me-2';
+    // input.type = 'checkbox';
+    div.appendChild(input);
+    div.innerText = document.getElementById('form3').value;
+    li.appendChild(div);
+
+    const a = document.createElement('a');
+    a.href='';
+    a.title='RemoveItem';
+
+    const i = document.createElement('i');
+    i.className='fas fa-times text-primary';
+    a.appendChild(i);
+    li.appendChild(a);
+    list.appendChild(li);
+    sendToServer();
+  }
+
+  const sendToServer = () => {
+    fetch("/test", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        listId : 1,
+        listCompleted : true,
+        listTitle : 'ok'
+      }),
+    }).then((response) => response.json())
+    .then((res) => console.log(res));
+  }
+
+</script>
