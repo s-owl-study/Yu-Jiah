@@ -1,6 +1,6 @@
 package com.todolist.todolist_jpa;
 
-        import com.todolist.todolist_jpa.domain.entity.ListEntity;
+import com.todolist.todolist_jpa.domain.entity.ListEntity;
         import com.todolist.todolist_jpa.dto.ListDto;
         import com.todolist.todolist_jpa.repository.ListRepository;
         import com.todolist.todolist_jpa.service.ListService;
@@ -39,7 +39,7 @@ public class ListServiceTest {
         when(this.listRepository.save(any(ListEntity.class)))
                 .then(AdditionalAnswers.returnsFirstArg());
 
-        ListDto expected = ListDto.builder();
+        ListDto expected = ListDto.builder()
                 .listId(123L)
                 .listTitle("오늘 할 일")
                 .listCompleted("완료")

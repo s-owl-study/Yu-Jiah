@@ -24,7 +24,7 @@ public class ListServiceImpl implements ListService {
         ListEntity listEntity = ListEntity.builder()
                 .listId(listDto.getListId())
                 .listTitle(listDto.getListTitle())
-                .listCompleted(listDto.getListCompleted())
+                .listCompleted(listDto.isListCompleted())
                 .build();
         return this.listRepository.save(listEntity);
     }
@@ -52,8 +52,8 @@ public class ListServiceImpl implements ListService {
             listEntity.setListTitle(listDto.getListTitle());
         }
 
-        if (listDto.getListCompleted() != null) {
-            listEntity.setListCompleted(listDto.getListCompleted());
+        if (listDto.isListCompleted()) {
+            listEntity.setListCompleted(listDto.isListCompleted());
         }
 
         return this.listRepository.save(listEntity);
