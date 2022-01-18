@@ -12,6 +12,8 @@ import javax.persistence.Id;
 @ToString
 @AllArgsConstructor
 public class UserDto {
+
+
     private Long userNo;
     private String userIp;
 }

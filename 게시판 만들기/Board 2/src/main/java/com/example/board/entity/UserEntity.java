@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @ToString
 @Getter
@@ -16,12 +17,14 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userNo;
+    @OneToMany
+    @JoinColumn(name = "userNo")
+    private UserEntity userEntity;
     private String userIp;
 
     @Builder
-    public UserEntity(Long userNo, String userIp) {
-        this.userNo = userNo;
+    public UserEntity(UserEntity userEntity, String userIp) {
+        this.userEntity = userEntity;
         this.userIp = userIp;
     }
 }
