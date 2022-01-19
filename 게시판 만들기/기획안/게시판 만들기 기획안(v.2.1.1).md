@@ -215,7 +215,7 @@ https://drive.google.com/file/d/1La0losPMcSbyoTuKw72J0oLkPyGm2OUF/view?usp=shari
 - 테이블명은 **board_table**
 - 칼럼은 총 11개 사용
 - 게시글 번호로 구분해야하므로 PK는 **boardNo**
-- PK값은 자동으로 1씩 증가하도록 설정**(AUTO_INCREMENT)**
+- PK값은 자동으로 1씩 증가하도록 설정 **(AUTO_INCREMENT)**
 - 모든 칼럼에서 **Null 값은 허용하지 않음**
 - FK는 **userNo, fileNo, commentNo**
 
@@ -230,7 +230,7 @@ https://drive.google.com/file/d/1La0losPMcSbyoTuKw72J0oLkPyGm2OUF/view?usp=shari
 - 테이블명은 **Comment**
 - 칼럼은 총 7개 사용
 - 댓글 번호 구분해야하므로 PK는 **commentNo**
-- PK값은 자동으로 1씩 증가하도록 설정**(AUTO_INCREMENT)**
+- PK값은 자동으로 1씩 증가하도록 설정 **(AUTO_INCREMENT)**
 - 모든 칼럼에서 **Null 값은 허용하지 않음**
 - FK는 **userNo**
 
@@ -238,14 +238,14 @@ https://drive.google.com/file/d/1La0losPMcSbyoTuKw72J0oLkPyGm2OUF/view?usp=shari
 - 테이블명은 **User**
 - 칼럼은 총 3개 사용
 - 유저 번호 구분해야하므로 PK는 **userNo**
-- PK값은 자동으로 1씩 증가하도록 설정**(AUTO_INCREMENT)**
+- PK값은 자동으로 1씩 증가하도록 설정 **(AUTO_INCREMENT)**
 - 모든 칼럼에서 **Null 값은 허용하지 않음**
 
 ### Recommendation
 - 테이블명은 **Recommendation**
 - 칼럼은 총 3개 사용
 - 추천수 구분해야하므로 PK는 **recommendationNo**
-- PK값은 자동으로 1씩 증가하도록 설정**(AUTO_INCREMENT)**
+- PK값은 자동으로 1씩 증가하도록 설정 **(AUTO_INCREMENT)**
 - 모든 칼럼에서 **Null 값은 허용하지 않음**
 - FK는 **userNo, boardNo**
 
@@ -253,7 +253,7 @@ https://drive.google.com/file/d/1La0losPMcSbyoTuKw72J0oLkPyGm2OUF/view?usp=shari
 - 테이블명은 **ReportNo**
 - 칼럼은 총 3개 사용
 - 신고수 구분해야하므로 PK는 **ReportNo**
-- PK값은 자동으로 1씩 증가하도록 설정**(AUTO_INCREMENT)**
+- PK값은 자동으로 1씩 증가하도록 설정 **(AUTO_INCREMENT)**
 - 모든 칼럼에서 **Null 값은 허용하지 않음**
 - FK는 **userNo, boardNo**
 
