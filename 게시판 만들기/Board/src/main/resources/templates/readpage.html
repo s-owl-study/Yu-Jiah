@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판</title>
+</head>
+<body>
+<h1>게시글 조회</h1>
+<form action="createpage.html" method="post">
+<input type="submit" value="게시글 등록">
+</form>
+<form action="identificationpage.html" method="get">
+<input type="submit" value="수정"><input type="submit" value="삭제">
+</form>
+제목:
+<br>
+작성자: &nbsp; 작성일자: &nbsp; 조회수: &nbsp; 추천수: &nbsp; 댓글수: &nbsp; <br>
+<hr>
+내용:
+<br><br><br><br><br>
+<input type="submit" value="추천" onclick="alert('추천이 완료되었습니다.')">
+<input type="submit" value="신고" onclick="alert('신고가 완료되었습니다.')">
+<hr>
+전체 댓글
+<hr>
+작성자: <input type="text" name="userName"> &nbsp; 댓글: <textarea name="boardContent" rows="3" cols="50"></textarea>    <input type="file" name="fileNo" id="files" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi" onchange="checkFile(this)"> <br>
+
+<br>
+비밀번호: <input type="password" name="userPassword"> 등록: <input type="submit" value="등록" onclick="alert('동록이 완료되었습니다.')">
+<form action="mainpage.html" method="get">
+<input type="submit" value="목록">
+</form>
+
+</body>
+</html>
