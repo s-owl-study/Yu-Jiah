@@ -2,44 +2,178 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>게시판</title>
+    <title>Board</title>
+</head>
+<script>
+    /** 게시판 - 목록 페이지 이동 */
+    function goBoardList(){
+    location.href = "/board/boardList";
+    }
+
+    /** 게시판 - 작성  */
+    function insertBoard(){
+    var boardTitle = $("#boardTitle").val(); //게시글 제목
+    var boardContent = $("#boardContent").val(); //게시글 내용
+    var userName = $("#userName").val(); //작성자
+    var boardPassword = $("#boardPassword").val(); //비밀번호
+
+        //정보가 하나라도 입력되지 않았을 경우
+    if (boardTitle == ""){
+    alert("입력되지 않은 정보가 있습니다.");
+    $("#boardTitle").focus();
+    return;
+    }
+
+    if (boardContent == ""){
+    alert("입력되지 않은 정보가 있습니다.");
+    $("#boardContent").focus();
+    return;
+    }
+
+    if (userName == ""){
+        alert("입력되지 않은 정보가 있습니다.");
+        $("#userName").focus();
+        return;
+        }
+
+    if (boardPassword == ""){
+        alert("입력되지 않은 정보가 있습니다.");
+        $("#boardPassword").focus();
+        return;
+        }
+
+    var yn = confirm("게시글을 등록하시겠습니까?");
+    if(yn){
+
+    var filesChk = $("input[name='files[0]']").val();
+    if(filesChk == ""){
+    $("input[name='files[0]']").remove();
+    }
+
+    $("#boardForm").ajaxForm({
+
+    url        : "/board/insertBoard",
+    enctype    : "multipart/form-data",
+    cache   : false,
+    async   : true,
+    type    : "POST",
+    success : function(obj) {
+    insertBoardCallback(obj);
+    },
+    error     : function(xhr, status, error) {}
+
+    }).submit();
+    }
+    }
+
+    /** 게시판 - 작성 콜백 함수 */
+    function insertBoardCallback(obj){
+
+    if(obj != null){
+
+    var result = obj.result;
+
+    if(result == "SUCCESS"){
+    alert("게시글 등록을 성공하였습니다.");
+    //goBoardList(); 게시글 하나 조회 페이지로 이동
+
+    } else {
+    alert("다시 입력해주세요");
+    return;
+    }
+    }
+    }
+
+
+function checkFile(el) {
+
+    // files 로 해당 파일 정보 얻기.
+    var file = el.files;
+
+    // file[0].size 는 파일 용량 정보입니다.
+    if (file[0].size > 1024 * 1024 * 50) {
+        // 용량 초과시 경고후 해당 파일의 용량도 보여줌
+        alert('50MB 이하 파일만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + (Math.round(file[0].size / 1024 / 1024 * 100) / 100) + 'MB');
+    }
+    const inputFile = document.getElementById("files");
+    const video = document.getElementById("video");
+    inputFile.addEventListener("change", function () {
+        const file = inputFile.files[0];
+        const videourl = URL.createObjectURL(file);
+        video.setAttribute("src", videourl);
+        video.play();
+    })
+}
+</script>
 </head>
 <body>
-<h1>게시글 작성</h1>
-        작성자: <input type="text" name="userName"> &nbsp; 비밀번호: <input type="password" name="userPassword">
-<br><br>
-    제목: <input type="text" name="boardTitle">
-<br><br> 내용: <Br>
-   <textarea name="boardContent" rows="30" cols="100"></textarea>
-<br><br>
-    <form method enctype="multipart/form-data">
-        <div>
-            <input type="file" name="fileNo" id="files" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi" onchange="checkFile(this)">
+<div id="wrap">
+    <div id="container">
+        <div class="inner">
+            <h1>게시글 작성</h1>
+            <form id="boardForm" name="boardForm" action="/board/insertBoard" enctype="multipart/form-data" method="post" onsubmit="return false;">
+                작성자: <input type="text" name="userName"> &nbsp; 비밀번호: <input type="password" name="userPassword">
+                <br><br>
+                제목: <input type="text" name="boardTitle">
+                <br><br> 내용: <Br>
+                <textarea name="boardContent" rows="30" cols="100"></textarea>
+                <br><br>
+                <form method enctype="multipart/form-data">
+                    <div>
+                        <input type="file" name="fileNo" id="files" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi" onchange="checkFile(this)">
+                    </div>
+                </form>
+                <!--<form action="mainpage.html" method="get">-->
+<!--                <table width="100%" class="table02">-->
+<!--                    <caption><strong><span class="t_red">*</span> 표시는 필수입력 항목입니다.</strong></caption>-->
+<!--                    <colgroup>-->
+<!--                        <col width="20%">-->
+<!--                        <col width="*">-->
+<!--                    </colgroup>-->
+<!--                    <tbody id="tbody">-->
+<!--                    <tr>-->
+<!--                        <th>제목<span class="t_red">*</span></th>-->
+<!--                        <td><input id="boardTitle" name="boardTitle" value="" class="tbox01"/></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>작성자<span class="t_red">*</span></th>-->
+<!--                        <td><input id="board_writer" name="board_writer" value="" class="tbox01"/></td>-->
+<!--                        작성자: <input type="text" name="userName"> &nbsp; 비밀번호: <input type="password" name="userPassword">-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th>내용<span class="t_red">*</span></th>-->
+<!--                        <td><textarea id="board_content" name="board_content" cols="10" rows="5" class="textarea01"></textarea></td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <th scope="row">첨부파일</th>-->
+<!--                        <td><input type="file" id="files[0]" name="files[0]" value=""></td>-->
+<!--                    </tr>-->
+<!--                    </tbody>-->
+<!--                </table>-->
+<!--            </form>-->
+                <form action="mainpage.html" method="get">
+                <button type="button" onclick="alert('등록이 취소되었습니다.')">취소</button>
+                </form>
+                <button type="button" class="btn black" onclick="javascript:insertBoard();">등록</button>
         </div>
-    </form>
-<form action="mainpage.html" method="get">
-    <input type="submit" value="취소"></form>
-<form action="readpage.html" method="get"> <input type="submit" value="등록" onclick="alert('등록이 완료되었습니다.')"></form>
-<script>
-    function checkFile(el) {
-
-        // files 로 해당 파일 정보 얻기.
-        var file = el.files;
-
-        // file[0].size 는 파일 용량 정보입니다.
-        if (file[0].size > 1024 * 1024 * 50) {
-            // 용량 초과시 경고후 해당 파일의 용량도 보여줌
-            alert('2MB 이하 파일만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + (Math.round(file[0].size / 1024 / 1024 * 100) / 100) + 'MB');
-        }
-        const inputFile = document.getElementById("files");
-        const video = document.getElementById("video");
-        inputFile.addEventListener("change", function () {
-            const file = inputFile.files[0];
-            const videourl = URL.createObjectURL(file);
-            video.setAttribute("src", videourl);
-            video.play();
-        })
-    }
-</script>
+    </div>
+</div>
+<!--<body>-->
+<!--<h1>게시글 작성</h1>-->
+<!--        작성자: <input type="text" name="userName"> &nbsp; 비밀번호: <input type="password" name="userPassword">-->
+<!--<br><br>-->
+<!--    제목: <input type="text" name="boardTitle">-->
+<!--<br><br> 내용: <Br>-->
+<!--   <textarea name="boardContent" rows="30" cols="100"></textarea>-->
+<!--<br><br>-->
+<!--    <form method enctype="multipart/form-data">-->
+<!--        <div>-->
+<!--            <input type="file" name="fileNo" id="files" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi" onchange="checkFile(this)">-->
+<!--        </div>-->
+<!--    </form>-->
+<!--<form action="mainpage.html" method="get">-->
+<!--    <input type="submit" value="취소"></form>-->
+<!--<form action="readpage.html" method="get"> <input type="submit" value="등록" onclick="alert('등록이 완료되었습니다.')"></form>-->
+<!--</body>-->
 </body>
 </html>
