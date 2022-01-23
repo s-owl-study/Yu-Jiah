@@ -52,7 +52,7 @@
 
     $("#boardForm").ajaxForm({
 
-    url        : "/board/insertBoard",
+    url        : "/board/createBoard",
     enctype    : "multipart/form-data",
     cache   : false,
     async   : true,
@@ -75,7 +75,7 @@
 
     if(result == "SUCCESS"){
     alert("게시글 등록을 성공하였습니다.");
-    //goBoardList(); 게시글 하나 조회 페이지로 이동
+    goBoardList();
 
     } else {
     alert("다시 입력해주세요");
@@ -111,8 +111,9 @@ function checkFile(el) {
     <div id="container">
         <div class="inner">
             <h1>게시글 작성</h1>
-            <form id="boardForm" name="boardForm" action="/board/insertBoard" enctype="multipart/form-data" method="post" onsubmit="return false;">
+            <form id="boardForm" name="boardForm" action="/board/createboard" enctype="multipart/form-data" method="post" onsubmit="return false;">
                 작성자: <input type="text" name="userName"> &nbsp; 비밀번호: <input type="password" name="userPassword">
+            </form>
                 <br><br>
                 제목: <input type="text" name="boardTitle">
                 <br><br> 내용: <Br>
@@ -152,12 +153,9 @@ function checkFile(el) {
 <!--                </table>-->
 <!--            </form>-->
                 <form action="mainpage.html" method="get">
-                <button type="button" onclick="alert('등록이 취소되었습니다.')">취소</button>
+                <button type="button" onclick="javascript:goBoardList()">취소</button>
                 </form>
                 <button type="button" class="btn black" onclick="javascript:insertBoard();">등록</button>
-        </div>
-    </div>
-</div>
 <!--<body>-->
 <!--<h1>게시글 작성</h1>-->
 <!--        작성자: <input type="text" name="userName"> &nbsp; 비밀번호: <input type="password" name="userPassword">-->
@@ -175,5 +173,8 @@ function checkFile(el) {
 <!--    <input type="submit" value="취소"></form>-->
 <!--<form action="readpage.html" method="get"> <input type="submit" value="등록" onclick="alert('등록이 완료되었습니다.')"></form>-->
 <!--</body>-->
+        </div>
+    </div>
+</div>
 </body>
 </html>
