@@ -8,6 +8,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Timestamp;
 
+import static javax.xml.stream.XMLStreamConstants.NAMESPACE;
+
 @Getter
 @Setter
 @Builder
@@ -25,6 +27,9 @@ public class BoardListDto {
     private UserEntity userEntity;
     private AttachedFilesEntity attachedFilesEntity;
     private CommentEntity commentEntity;
-
+//
+//    public int insertBoard(BoardForm boardForm) throws Exception {
+//        return sqlSession.insert(NAMESPACE + ".insertBoard", boardForm);
+//    }
 }
 

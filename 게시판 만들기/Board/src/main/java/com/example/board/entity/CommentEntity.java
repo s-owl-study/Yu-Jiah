@@ -20,10 +20,7 @@ public class CommentEntity {
     private Long commentNo;
     private String commentContent;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
     private Timestamp commentWriteDate;
-
-    @Temporal(value = TemporalType.TIMESTAMP)
     private Timestamp commentWriteUpdate;
 
 

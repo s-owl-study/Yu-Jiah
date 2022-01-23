@@ -21,10 +21,7 @@ public class BoardListEntity {
     private String boardTitle;
     private String boardContent;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
     private Timestamp boardWriteDate;
-
-    @Temporal(value = TemporalType.TIMESTAMP)
     private Timestamp boardWriteUpdate;
 
     private boolean boardDeleted;

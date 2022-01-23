@@ -17,18 +17,17 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @OneToMany
-    @JoinColumn(name = "userNo")
-    private UserEntity userEntity;
+    private Long userId;
 
     private String userName;
 
     private String userIp;
 
     @Builder
-    public UserEntity(UserEntity userEntity, String userIp, String userName) {
-        this.userEntity = userEntity;
-        this.userIp = userIp;
+    public UserEntity(Long userId, String userName, String userIp) {
+        this.userId = userId;
         this.userName = userName;
+        this.userIp = userIp;
     }
+
 }

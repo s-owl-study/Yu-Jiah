@@ -1,39 +1,41 @@
 package com.example.board.service;
 
 import com.example.board.dto.BoardListDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class BoardListService {
 
-
-    //게시글 저장
-   public void createBoard(BoardListDto boardListDto){
-
-   }
-
-   //게시글 수정
-   public void updateBoard(Long boardNo){
-
-   }
-
-   //게시글 삭제
-    public void deleteBoard(Long boardNo){
-
-    }
-
-    //전체 검색
-   public List<BoardListDto> searchAll(){
-
-   }
-
-   //유저이름으로 검색
-    public List<BoardListDto> searchByUserName(String userName){
-
-    }
-
-    //내용, 제목으로 검색
-    public List<BoardListDto> searchByBoardContent(String boardContent, String boardTitle) {
-    }
+//    @Autowired
+//    BoardListDto boardListDto;
+//
+//
+//    public BoardListDto insertBoard(BoardForm boardForm) throws Exception {
+//
+////        BoardListDto boardDto = new BoardListDto();
+//
+//        int insertCnt = 0;
+//
+////        int boardReRef = boardDao.getBoardReRef(boardForm);
+////        boardForm.setBoard_re_ref(boardReRef);
+//
+//        insertCnt = boardListDto.insertBoard(boardForm);
+//
+//        List<BoardFileForm> boardFileList = getBoardFileInfo(boardForm);
+//        for (BoardFileForm boardFileForm : boardFileList) {
+//            boardListDto.insertBoardFile(boardFileForm);
+//        }
+//
+//        if (insertCnt > 0) {
+//            boardListDto.setResult("SUCCESS");
+//        } else {
+//            boardListDto.setResult("FAIL");
+//        }
+//
+//        return boardDto;
+//    }
 
 }
