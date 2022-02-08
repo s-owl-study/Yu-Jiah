@@ -3,16 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <style>
+    .update_section1 {
+    font-family: 'Gowun Dodum', sans-serif;
+    text-align: center;
+    }
+
+    .update_section2 {
+    font-family: 'Gowun Dodum', sans-serif;
+    font-weight: bold;
+    }
+
+    .update_section3 {
+    font-family: 'Gowun Dodum', sans-serif;
+    font-weight: bold;
+    }
+
+    .update_section4 {
+    font-family: 'Gowun Dodum', sans-serif;
+    font-weight: bold;
+    }
+
+    .update_button_files {
+    background-color: #1abc9c;
+    color: black;
+    font-weight: bold;
+    font-family: 'Gowun Dodum', sans-serif;
+    border-style: none;
+    border-radius: 5px;
+    }
+
+    .update_button_cancel {
+    background-color: #1abc9c;
+    color: black;
+    font-weight: bold;
+    font-family: 'Gowun Dodum', sans-serif;
+    border-style: none;
+    margin: 10px;
+    border-radius: 5px;
+    }
+
+    .update_button_upload {
+    background-color: #1abc9c;
+    color: black;
+    font-weight: bold;
+    font-family: 'Gowun Dodum', sans-serif;
+    border-style: none;
+    margin: 10px;
+    border-radius: 5px;
+    }
+
+    </style>
 </head>
-<body>
-<h1>게시글 수정</h1>
-작성자:
+
+<body id="page-top">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" onclick="goBoardList();">지아의 게시판</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+</nav>
+
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <h1 class="masthead-heading text-uppercase mb-0">게시글 작성</h1>
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+</header>
+
 <br>
-<form>
+<br>
+
+<article>
+    <section class="update_section1">
+작성자: <input type="text" name="userName" id="userName" style="border: none" value="{#userName}">
+    </section>
+<br>
+
+    <section class="update_section2">
     <input type="text" name="boardTitle" value="제목"><br><br>
     <textarea name="boardContent" rows="30" cols="100">내용</textarea><br><br>
-    <input type="file" name="upload_file" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi"><br><br>
-    <input type="submit" value="취소"> &nbsp; <form action="readpage.html"><input type="submit" value="등록" onclick="alert('수정이 완료되었습니다.')"></form>
-</form>
+    </section>
+
+    <section class="update_section3">
+        <form method enctype="multipart/form-data">
+            <input type="file" name="fileNo" style="display: none"/>
+            <button type="button" class="update_button_files" onclick="checkFile(this)">파일 업로드<i class="fas fa-file-upload"></i></button>
+        </form>
+        <br>
+    </section>
+
+    <section class="update_section4">
+        <section class="create_section4">
+            <button class="update_button_cancel" type="button" onclick="javascript:btn_cancel()">취소&nbsp;<i class="fas fa-times"></i></button>
+            <button class="update_button_upload" type="button" onclick="javascript:insertBoard()">등록&nbsp;<i class="fas fa-upload"></i></button>
+        </section>
+    </section>
+</article>
 </body>
 </html>
