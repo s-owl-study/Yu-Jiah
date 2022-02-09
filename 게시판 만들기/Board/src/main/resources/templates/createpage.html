@@ -22,6 +22,15 @@
             location.href = "/board/boardList";
         }
 
+        function goBoardDetail1(){
+            if (confirm("게시글을 등록하시겠습니까?")) {
+                {
+                    alert("게시글이 등록되었습니다.");
+                    location.href = "/board/boardDetail/1";
+                }
+            }
+        }
+
         /** 게시판 - 작성  */
         function insertBoard(){
             var boardTitle = $("#boardTitle").val(); //게시글 제목
@@ -125,6 +134,16 @@
                 }
             }
         }
+
+        function goUploadBoard(){
+            if (confirm("게시글을 등록하시겠습니까?")) {
+                {
+                    alert("게시글이 등록되었습니다.");
+                    goBoardDetail(1);
+                }
+            }
+
+        }
     </script>
     <style>
         .create_section1 {
@@ -197,16 +216,6 @@
             border-radius: 5px;
         }
 
-        .create_section1_div1{
-            position: relative;
-            right: 210px;
-        }
-
-        .create_section1_div2{
-            position: relative;
-            right: 290px;
-        }
-
         .create_section3 {
             position: relative;
             right: 315px;
@@ -244,13 +253,11 @@
 
 
     <section class="create_section1">
-        <div class="create_section1_div1">
+        <div class="create_section1_div1" style="position: relative; right: 200px">
                 <input style="border-color: #1abc9c; border-width: 3px;" type="text" name="userName" id="userName" value="작성자"> &nbsp; <input style="border-color: #1abc9c; border-width: 3px;" type="password" class="userPassword" value="비밀번호">
         </div>
-        <br>
-        <div class="create_section1_div2">
-                <input style="border-color: #1abc9c; border-width: 3px;" type="text" name="boardTitle" id="boardTitle" value="제목을 입력해주세요.">
-        </div>
+            <br>
+                <input style="border-color: #1abc9c; border-width: 3px; width:730px;" type="text" name="boardTitle" id="boardTitle" value="제목을 입력해주세요.">
     </section>
 
     <section class="create_section2">
@@ -270,7 +277,7 @@
 
     <section class="create_section4">
         <button class="create_button_cancel" type="button" onclick="javascript:btn_cancel()">취소&nbsp;<i class="fas fa-times"></i></button>
-        <button class="create_button_upload" type="button" onclick="javascript:insertBoard();">등록&nbsp;<i class="fas fa-upload"></i></button>
+        <button class="create_button_upload" type="button" onclick="javascript:goBoardDetail1();">등록&nbsp;<i class="fas fa-upload"></i></button>
     </section>
 </article>
 </body>

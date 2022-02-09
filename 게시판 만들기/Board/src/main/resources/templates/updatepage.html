@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>게시판</title>
+    <title>Board</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
@@ -12,60 +12,214 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="/css/styles.css" rel="stylesheet" />
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <script>
+        /** 게시판 - 목록 페이지 이동 */
+        function goBoardList(){
+            location.href = "/board/boardList";
+        }
+
+        /** 게시판 - 작성  */
+        function insertBoard(){
+            var boardTitle = $("#boardTitle").val(); //게시글 제목
+            var boardContent = $("#boardContent").val(); //게시글 내용
+            var userName = $("#userName").val(); //작성자
+            var boardPassword = $("#boardPassword").val(); //비밀번호
+
+            //정보가 하나라도 입력되지 않았을 경우
+            if (boardTitle == ""){
+                alert("입력되지 않은 정보가 있습니다.");
+                $("#boardTitle").focus();
+                return;
+            }
+
+            if (boardContent == ""){
+                alert("입력되지 않은 정보가 있습니다.");
+                $("#boardContent").focus();
+                return;
+            }
+
+            if (userName == ""){
+                alert("입력되지 않은 정보가 있습니다.");
+                $("#userName").focus();
+                return;
+            }
+
+            if (boardPassword == ""){
+                alert("입력되지 않은 정보가 있습니다.");
+                $("#boardPassword").focus();
+                return;
+            }
+
+            var yn = confirm("게시글을 등록하시겠습니까?");
+            if(yn){
+
+                var filesChk = $("input[name='files[0]']").val();
+                if(filesChk == ""){
+                    $("input[name='files[0]']").remove();
+                }
+
+                $("#boardForm").ajaxForm({
+
+                    url        : "/board/createBoard",
+                    enctype    : "multipart/form-data",
+                    cache   : false,
+                    async   : true,
+                    type    : "POST",
+                    success : function(obj) {
+                        insertBoardCallback(obj);
+                    },
+                    error     : function(xhr, status, error) {}
+
+                }).submit();
+            }
+        }
+
+        /** 게시판 - 작성 콜백 함수 */
+        function insertBoardCallback(obj){
+
+            if(obj != null){
+
+                var result = obj.result;
+
+                if(result == "SUCCESS"){
+                    alert("게시글 등록을 성공하였습니다.");
+                    goBoardList();
+
+                } else {
+                    alert("다시 입력해주세요");
+                    return;
+                }
+            }
+        }
+
+
+        function checkFile(el) {
+
+            // files 로 해당 파일 정보 얻기.
+            var file = el.files;
+
+            // file[0].size 는 파일 용량 정보입니다.
+            if (file[0].size > 1024 * 1024 * 50) {
+                // 용량 초과시 경고후 해당 파일의 용량도 보여줌
+                alert('50MB 이하 파일만 등록할 수 있습니다.\n\n' + '현재파일 용량 : ' + (Math.round(file[0].size / 1024 / 1024 * 100) / 100) + 'MB');
+            }
+            const inputFile = document.getElementById("files");
+            const video = document.getElementById("video");
+            inputFile.addEventListener("change", function () {
+                const file = inputFile.files[0];
+                const videourl = URL.createObjectURL(file);
+                video.setAttribute("src", videourl);
+                video.play();
+            })
+        }
+
+        function btn_cancel(){
+            if (confirm("게시글 작성을 취소하시겠습니까?")) {
+                {
+                    alert("게시글 작성이 취소되었습니다.");
+                    goBoardList();
+                }
+            }
+        }
+
+        function goUploadBoard(){
+            if (confirm("게시글을 등록하시겠습니까?")) {
+                {
+                    alert("게시글이 등록되었습니다.");
+                    goBoardDetail(1);
+                }
+            }
+
+        }
+
+        function goBoardDetail2(){
+            if (confirm("게시글을 등록하시겠습니까?")) {
+                {
+                    alert("게시글이 등록되었습니다.");
+                    location.href = "/board/boardDetail/2";
+                }
+            }
+        }
+    </script>
     <style>
-    .update_section1 {
-    font-family: 'Gowun Dodum', sans-serif;
-    text-align: center;
-    }
+        .create_section1 {
+            font-family: 'Gowun Dodum', sans-serif;
+            text-align: center;
+        }
 
-    .update_section2 {
-    font-family: 'Gowun Dodum', sans-serif;
-    font-weight: bold;
-    }
+        .userName {
+            font-family: 'Gowun Dodum', sans-serif;
+            font-weight: bold;
+        }
 
-    .update_section3 {
-    font-family: 'Gowun Dodum', sans-serif;
-    font-weight: bold;
-    }
+        .userPassword {
+            font-family: 'Gowun Dodum', sans-serif;
+            font-weight: bold;
+        }
 
-    .update_section4 {
-    font-family: 'Gowun Dodum', sans-serif;
-    font-weight: bold;
-    }
+        .boardTitle {
+            font-family: 'Gowun Dodum', sans-serif;
+            font-weight: bold;
+        }
 
-    .update_button_files {
-    background-color: #1abc9c;
-    color: black;
-    font-weight: bold;
-    font-family: 'Gowun Dodum', sans-serif;
-    border-style: none;
-    border-radius: 5px;
-    }
+        .create_section2 {
+            font-family: 'Gowun Dodum', sans-serif;
+            text-align: center;
+        }
 
-    .update_button_cancel {
-    background-color: #1abc9c;
-    color: black;
-    font-weight: bold;
-    font-family: 'Gowun Dodum', sans-serif;
-    border-style: none;
-    margin: 10px;
-    border-radius: 5px;
-    }
+        .boardContent {
+            font-family: 'Gowun Dodum', sans-serif;
+            border: solid 3px #1abc9c;
+            font-weight: bold;
+        }
 
-    .update_button_upload {
-    background-color: #1abc9c;
-    color: black;
-    font-weight: bold;
-    font-family: 'Gowun Dodum', sans-serif;
-    border-style: none;
-    margin: 10px;
-    border-radius: 5px;
-    }
+        .create_section3 {
+            font-family: 'Gowun Dodum', sans-serif;
+            text-align: center;
+        }
 
+        .create_button_files {
+            background-color: #1abc9c;
+            color: black;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            border-radius: 5px;
+        }
+
+        .create_section4 {
+            font-family: 'Gowun Dodum', sans-serif;
+            text-align: center;
+        }
+
+        .create_button_cancel {
+            background-color: #1abc9c;
+            color: red;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .create_button_upload {
+            background-color: #1abc9c;
+            color: black;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .create_section3 {
+            position: relative;
+            right: 315px;
+        }
     </style>
 </head>
 
@@ -96,29 +250,34 @@
 <br>
 
 <article>
-    <section class="update_section1">
-작성자: <input type="text" name="userName" id="userName" style="border: none" value="{#userName}">
-    </section>
-<br>
 
-    <section class="update_section2">
-    <input type="text" name="boardTitle" value="제목"><br><br>
-    <textarea name="boardContent" rows="30" cols="100">내용</textarea><br><br>
+
+    <section class="create_section1">
+        <div class="create_section1_div1" style="position: relative; right: 300px;">
+            작성자: 지아
+        </div>
+        <br>
+        <input style="border-color: #1abc9c; border-width: 3px; width:730px;" type="text" name="boardTitle" id="boardTitle" value="제목을 입력해주세요.">
     </section>
 
-    <section class="update_section3">
+    <section class="create_section2">
+        <br><br>
+        <textarea style="border-color: #1abc9c; border-width: 3px" name="boardContent" id="boardContent" rows="30" cols="100">내용을 입력해주세요.</textarea>
+    </section>
+
+    <br><br>
+    <section class="create_section3">
         <form method enctype="multipart/form-data">
             <input type="file" name="fileNo" style="display: none"/>
-            <button type="button" class="update_button_files" onclick="checkFile(this)">파일 업로드<i class="fas fa-file-upload"></i></button>
+            <button type="button" class="create_button_files" onclick="checkFile(this)">파일 업로드<i class="fas fa-file-upload"></i></button>
         </form>
-        <br>
     </section>
 
-    <section class="update_section4">
-        <section class="create_section4">
-            <button class="update_button_cancel" type="button" onclick="javascript:btn_cancel()">취소&nbsp;<i class="fas fa-times"></i></button>
-            <button class="update_button_upload" type="button" onclick="javascript:insertBoard()">등록&nbsp;<i class="fas fa-upload"></i></button>
-        </section>
+    <br>
+
+    <section class="create_section4">
+        <button class="create_button_cancel" type="button" onclick="javascript:btn_cancel()">취소&nbsp;<i class="fas fa-times"></i></button>
+        <button class="create_button_upload" type="button" onclick="javascript:goBoardDetail2();">등록&nbsp;<i class="fas fa-upload"></i></button>
     </section>
 </article>
 </body>

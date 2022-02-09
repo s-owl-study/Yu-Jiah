@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>게시판 만들기</title>
+
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="/css/styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <style>
+        .readpage_article{
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        .writeBoard {
+            background-color: #1abc9c;
+            color: black;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .updateBoard{
+            background-color: #1abc9c;
+            color: black;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .deleteBoard {
+            background-color: #1abc9c;
+            color: red;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .recommendationButton {
+            background-color: #1abc9c;
+            color: yellow;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .reportButton {
+            background-color: #1abc9c;
+            color: red;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .create_button_files {
+            background-color: #1abc9c;
+            color: black;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .commentUpload {
+            background-color: #1abc9c;
+            color: black;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .goBoardList {
+            background-color: #1abc9c;
+            color: black;
+            font-weight: bold;
+            font-family: 'Gowun Dodum', sans-serif;
+            border-style: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+
+        .readpage_section3 {
+            text-align: center;
+        }
+
+        .readpage_section2_div1{
+            font-weight: bold;
+            position: relative;
+            right: 300px;
+            font-size: x-large;
+        }
+
+        .readpage_section2_div2{
+            position: relative;
+            right: 150px;
+        }
+
+        .readpage_section6{
+            text-align: center;
+        }
+
+        .readpage_hr {
+            text-align: center;
+            position: relative;
+        }
+
+        /*.readpage_section4{*/
+        /*    position: relative;*/
+        /*    right: 250px;*/
+        /*}*/
+
+        .readpage_section1{
+            position: relative;
+            left: 270px;
+            border-color: #1abc9c;
+            border-width: 3px;
+        }
+
+        /*.readpage_section5 {*/
+        /*    text-align: center;*/
+        /*}*/
+
+        .readpage_section6 {
+            text-align: center;
+        }
+
+        .readpage_article {
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        //자바스크립트의 onclick 같은 기능 html이 화면에 뿌려지고 나서 ready안에 서술된 이벤트들이 동작 준비를 하는 것
+        $(document).ready(function(){
+            getBoardDetail();
+        });
+
+
+        /** 게시판 추천 **/
+        var boardRecommendation = 0;
+        function getRecommendation(){
+            boardRecommendation = boardRecommendation + 1;
+            return alert("게시글을 추천하였습니다.");
+        }
+
+
+        /** 게시판 신고**/
+        var boardReport = 0;
+        function getReport(){
+            boardReport = boardReport +1;
+            return alert("게시글을 신고하였습니다.");
+        }
+
+        /**게시판 등록 이동**/
+        function goBoardWrite(){
+            location.href = "/board/createBoard";
+        }
+
+        /** 게시판 - 목록 페이지 이동 */
+        function goBoardList(){
+            location.href = "/board/boardList";
+        }
+
+        /** 댓글 - 댓글 조회 **/
+        function getCommentDetail(commentNo){
+
+            var commentNo = $("#commentNo").val();
+
+            if(commentNo != ""){
+
+                $.ajax({
+
+                    url        : "/board/boardDetail?boardNo="+ boardNo,
+//seriallize = 데이터를 보내기위해 폼요소 집합을 문자열로 인코딩
+                    data    : $("#CommentForm").serialize(),
+                    dataType: "JSON",
+                    cache   : false,
+                    async   : true,
+                    type    : "POST",
+
+//post가 성공하면 commentdetailcallback 함수 작동
+                    success : function(obj) {
+                        getCommentDetailCallback(obj);
+                    },
+                    error     : function(xhr, status, error) {}
+
+                });
+            } else {
+                alert("오류가 발생했습니다.\n관리자에게 문의하세요.");
+            }
+        }
+
+        /** 게시판 - 첨부파일 다운로드 */
+        function fileDownload(fileNameKey, fileName, filePath){
+
+            location.href = "/board/fileDownload?fileNameKey="+fileNameKey+"&fileName="+fileName+"&filePath="+filePath;
+        }
+
+        /** 게시판 - 상세 조회  */
+        function getBoardDetail(boardNo){
+
+            var boardNo = $("#boardNo").val();
+
+            if(boardNo != ""){
+
+                $.ajax({
+
+                    url        : "/board/boardDetail?boardNo="+ boardNo,
+//seriallize = 데이터를 보내기위해 폼요소 집합을 문자열로 인코딩
+                    data    : $("#boardForm").serialize(),
+                    dataType: "JSON",
+                    cache   : false,
+                    async   : true,
+                    type    : "POST",
+
+//post가 성공하면 boarddetailcallback 함수 작동
+                    success : function(obj) {
+                        getBoardDetailCallback(obj);
+                    },
+                    error     : function(xhr, status, error) {}
+
+                });
+            } else {
+                alert("오류가 발생했습니다.\n관리자에게 문의하세요.");
+            }
+        }
+
+        function getIdentificationForUpdate() {
+            prompt("비밀 번호를 입력해주세요", "");
+            if (confirm("게시글을 수정하시겠습니까?")) {
+                {
+                    alert("게시글 수정 페이지로 이동합니다.");
+                    goBoardUpdate();
+                }
+            }
+        }
+
+        function getIdentificationForDelete(){
+            prompt("비밀 번호를 입력해주세요", "");
+            if (confirm("게시글을 삭제하시겠습니까?")) {
+                {
+                    alert("게시글을 삭제합니다.");
+                    goBoardList();
+                }
+            }
+        }
+
+        function goBoardUpdate(){
+            location.href = "/board/updateBoard";
+        }
+
+
+
+
+    </script>
+</head>
+<body id="page_top">
+<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="/board/boardList">지아의 게시판</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ms-auto">
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <h1 class="masthead-heading text-uppercase mb-0">게시글 조회</h1>
+        <div class="divider-custom divider-light">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+    </div>
+</header>
+
+<article class="readpage_article">
+    <section class="readpage_section1" style="text-align: center;">
+        <button class="writeBoard" type="button" onclick="javascript:goBoardWrite();">게시글 등록<i class="fas fa-pen"></i></button>
+        <button type="button" class="updateBoard" onclick="javascript:getIdentificationForUpdate();">수정</button>
+        <button type="button" class="deleteBoard" onclick="javascript:getIdentificationForDelete();">삭제<i class="fas fa-times"></i></button>
+    </section>
+    <br><br>
+
+    <section class="readpage_section2" style="text-align: center;">
+        <div class="readpage_section2_div1" style="font-weight: bold; font-size: large; position: relative; right: 320px;"><strong>Hello</strong></div> &nbsp;
+        <div class="readpage_section2_div2">
+            <span name="userName" style="margin-right: 20px;">지아</span>
+            <span name="writeTime" style="margin-right: 20px; position: relative; left: 150px;">2022.02.07 10:00</span>
+            <span style="position: relative; left: 320px;">
+            <span name="userName" style="border-right: black;">조회 2</span>
+            <span name="userName" style="margin-right: 5px">추천 3</span>
+            <span name="userName" style="margin-right: 5px">댓글 2</span>
+            </span>
+        </div>
+    </section>
+    <hr style=" width: 50%; text-align: center; border: solid 3px #1abc9c; background-color: #1abc9c; border-width: 3px; position: relative; left: 500px;">
+    <section class="readpage_section3">
+        <div class="boardContent" style="position:relative; right: 300px;">안뇽-!
+        </div>
+        <br><Br><br>
+        <div class="section3_buttons">
+            <button type="button" class="recommendationButton" onclick="javascript:getRecommendation()">추천<i class="fas fa-star"></i></button>
+            <button type="button" class="reportButton" onclick="javascript:getReport();">신고<i class="fas fa-exclamation-triangle"></i></button>
+        </div>
+    </section>
+    <section class="readpage_section4">
+        <span style="position: relative; right: 300px;">전체 댓글 <span style="color: red; font-weight: bold;">3개</span></span>
+        <hr style="width: 50%; text-align: center; border: solid 3px #1abc9c; background-color: #1abc9c; position: relative; left: 500px;">
+    </section>
+    <span name="userName" style="position: relative; right: 200px;">지아유</span>
+    <span name="writeTime" style="margin-right: 20px; position: relative; right: 80px;">ㅎㅇㅎㅇ</span>
+    <span style="position: relative; left: 200px;">2022.02.09 13:00 <span style="color: red; font-weight: bold;">✕</span></span>
+    <br>
+    <span name="userName" style="position: relative; right: 180px;"><span style="color: #1abc9c; font-weight: bold;">ㄴ</span> 지아</span>
+    <span name="writeTime" style="margin-right: 20px; position: relative; right: 55px;">하이</span>
+    <span style="position: relative; left: 245px;">2022.02.09 13:05 <span style="color: red; font-weight: bold;">✕</span>
+    </span>
+    <br><br>
+    <span name="userName" style="position: relative; right: 190px;">Jiah Yu</span>
+    <span name="writeTime" style="margin-right: 20px; position: relative; right: 70px;">hi~ 你好！</span>
+    <span style="position: relative; left: 190px;">2022.02.09 13:08 <span style="color: red; font-weight: bold;">✕</span></span>
+
+    <br><br>
+    <section class="readpage_section5" style="display: flex;">
+        <section class="userName&PWD" style="position: relative; left: 450px;">
+            <input style="border-color: #1abc9c; border-width: 3px; left: 500px;" type="text" name="userName" value="작성자">
+            <br>
+            <input type="password"  style="border-color: #1abc9c; border-width: 3px;" name="commentPassword" value="비밀번호">
+            <br>
+        </section>
+        <span class="commentSection2">
+                <textarea name="commentContent" rows="3" cols="70" style="border-color: #1abc9c; border-width: 3px; position: relative; left:530px;">댓글 내용을 입력해주세요</textarea>
+                 </span>
+
+        <span class="commentSection3" style="position: relative; left: 600px;">
+<!--            <div style="position: relative; left: 300px; bottom: 150px">-->
+            <button type="button" class="create_button_files"  onclick="checkFile(this)">파일 업로드<i class="fas fa-file-upload"></i></button>
+                <br>
+            <button type="button" class="commentUpload" onclick="javascript=goCommentWrite();">댓글 등록<i class="fas fa-upload"></i></button>
+            <!--            </div>-->
+        </span>
+    </section>
+    <secion class="readpage_section6" style="text-align: center;">
+        <button type="button" style="text-align: center; position: center;" class="goBoardList" onclick="javascript:goBoardList();">목록</button>
+    </secion>
+</article>
+</body>
+</html>

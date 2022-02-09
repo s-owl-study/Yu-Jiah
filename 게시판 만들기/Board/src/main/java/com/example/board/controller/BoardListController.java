@@ -28,6 +28,37 @@ public class BoardListController {
         return "createpage";
     }
 
+    @RequestMapping("/updateBoard") //게시글 수정 페이지로 이동
+    public String updateBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        return "updatepage";
+    }
+//    function goBoardDetail(boardNo){
+//        location.href = "/board/boardDetail?boardNo="+ boardNo;
+//    }
+
+    @RequestMapping("/boardDetail/1") //1번 게시글 조회 페이지로 이동
+    public String readBoard1(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        return "readpage";
+    }
+
+    @RequestMapping("/boardDetail/2") //2번 게시글 조회 페이지로 이동
+    public String readBoard2(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        return "readpage";
+    }
+
+    @RequestMapping("/addComment") //댓글 추가 페이지로 이동
+    public String addComment(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        return "addcommentpage";
+    }
+
+
+
+
+
 //    @RequestMapping(value = "/insertBoard") //게시글 등록
 //    @ResponseBody
 //    public BoardListDto insertBoard(HttpServletRequest request, HttpServletResponse response, BoardForm boardForm) throws Exception {
@@ -36,29 +67,29 @@ public class BoardListController {
 //
 //        return BoardListDto;
 //    }
-
+//
     @RequestMapping("/boardDetail/{boardNo}")
     public String boardDetail(HttpServletRequest request, HttpServletResponse response, @PathVariable String boardNo) throws Exception {
 
         return "readpage";
     }
 
-    @RequestMapping("/boardUpdate?boardNo={boardNo}")
-    public String updateBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        return "updatepage";
-    }
-    @RequestMapping("/identificationForDelete")
-    public String identifyForUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        return "identificationfordelete";
-    }
-
-    @RequestMapping("/identificationForUpdate")
-    public String identifyForDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-        return "identificationforupdate";
-    }
+//    @RequestMapping("/boardUpdate?boardNo={boardNo}")
+//    public String updateBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//        return "updatepage";
+//    }
+//    @RequestMapping("/identificationForDelete")
+//    public String identifyForUpdate(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//        return "identificationfordelete";
+//    }
+//
+//    @RequestMapping("/identificationForUpdate")
+//    public String identifyForDelete(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//
+//        return "identificationforupdate";
+//    }
 
 
 //    @PostMapping(value = "/board/createboard")
