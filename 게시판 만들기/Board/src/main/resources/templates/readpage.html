@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>게시판</title>
-    <!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="utf-8" />
@@ -21,6 +16,125 @@
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+        <style>
+
+            .readpage_article {
+                font-size: large;
+                font-family: 'Gowun Dodum', sans-serif;
+            }
+            .writeBoard {
+                background-color: #1abc9c;
+                color: black;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .updateBoard{
+                background-color: #1abc9c;
+                color: black;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .deleteBoard {
+                background-color: #1abc9c;
+                color: red;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .recommendationButton {
+                background-color: #1abc9c;
+                color: yellow;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .reportButton {
+                background-color: #1abc9c;
+                color: red;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .commentFileUpload {
+                background-color: #1abc9c;
+                color: black;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .commentUpload {
+                background-color: #1abc9c;
+                color: black;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                border-radius: 5px;
+            }
+
+            .goBoardList {
+                background-color: #1abc9c;
+                color: black;
+                font-weight: bold;
+                font-family: 'Gowun Dodum', sans-serif;
+                border-style: none;
+                margin: 10px;
+                border-radius: 5px;
+            }
+
+            .readpage_section3 {
+                text-align: center;
+            }
+
+            .readpage_section2_div1{
+                font-weight: bold;
+                position: relative;
+                right: 300px;
+                font-size: x-large;
+            }
+
+            .readpage_section2_div2{
+                position: relative;
+                right: 150px;
+            }
+
+            .readpage_section6{
+                text-align: center;
+            }
+
+            .hr {
+                text-align: center;
+            }
+
+            .readpage_article{
+                text-align: center;
+            }
+
+        </style>
+
         <script>
             //자바스크립트의 onclick 같은 기능 html이 화면에 뿌려지고 나서 ready안에 서술된 이벤트들이 동작 준비를 하는 것
             $(document).ready(function(){
@@ -47,17 +161,6 @@
             function goBoardList(){
                 location.href = "/board/boardList";
             }
-
-            /** 게시판 조회에서 게시글 수정을 위해 본인확인 페이지로 이동**/
-            function getIdentificationForUpdate(){
-                location.href ="identificationForUpdate";
-            }
-
-            /** 게시판 조회에서 게시글 삭제를 위해본인확인 페이지로 이동**/
-            function getIdentificationForDelete(){
-                location.href ="identificationForDelete";
-            }
-
 
             /** 댓글 - 댓글 조회 **/
             function getCommentDetail(commentNo){
@@ -87,110 +190,6 @@
                     alert("오류가 발생했습니다.\n관리자에게 문의하세요.");
                 }
             }
-            /** 댓글 - 댓글 조회 콜백 함수 **/
-            function getBoardDetailCallback(obj){
-
-                var str = "";
-
-                if(obj != null){
-
-                    var commentNo       = obj.commentNo; //댓글 번호
-                    var commentWriteDate        = obj.commentWriteDate; //게시판 제목
-                    var commentWriteUpdate         = obj.commentWriteUpdate; //게시판 내용
-                    var commentDeleted         = obj.commentDeleted; //작성일자
-                    var commentContent     = obj.commentContent; //새로운 작성일자
-                    var commentPassword    = obj.commentPassword; //게시글 지운 것 여부
-                    var userName     = obj.userName; //게시글 조회수
-                    var userIp         = obj.userIp; //게시글 비밀번호
-                    // var userName            = obj.userName; //작성자명
-// var insDate         = obj.ins_date;
-// var updUserId         = obj.upd_user_id;
-// var updDate         = obj.upd_date;
-// var files            = obj.files;
-// var filesLen        = files.length;
-
-                    str += "<tr>";
-                    str += "<th>제목</th>";
-                    str += "<td>"+ boardTitle +"</td>";
-                    str += "</tr>";
-
-                    str += "<tr>";
-                    str += "<th>작성자</th>";
-                    str += "<td>"+ userName +"</td>";
-                    str += "<th>작성일시</th>";
-                    str += "<td>"+ boardWriteDate +"</td>";
-                    str += "<th>조회</th>";
-                    str += "<td>"+ boardReadCount +"</td>";
-                    str += "<th>추천</th>";
-                    str += "<td>"+ boardRecommendation +"</td>";
-                    str += "<th>전체 댓글수</th>";
-                    str += "<td>"+ board +"</td>";
-                    str += "</tr>";
-
-                    str += "<tr>";
-                    str += "<th>내용</th>";
-                    str += "<td colspan='3'>"+ boardContent +"</td>";
-                    str += "</tr>";
-
-                    if(filesLen > 0){
-
-                        for(var a=0; a<filesLen; a++){
-
-                            var boardSeq    = files[a].board_seq;
-                            var fileNo         = files[a].file_no;
-                            var fileNameKey = files[a].file_name_key;
-                            var fileName     = files[a].file_name;
-                            var filePath     = files[a].file_path;
-                            var fileSize     = files[a].file_size;
-                            var remark         = files[a].remark;
-                            var delYn         = files[a].del_yn;
-                            var insUserId     = files[a].ins_user_id;
-                            var insDate     = files[a].ins_date;
-                            var updUserId     = files[a].upd_user_id;
-                            var updDate     = files[a].upd_date;
-
-                            str += "<th>첨부파일</th>";
-//str += "<td onclick='javascript:fileDownload(\"" + fileNameKey + "\", \"" + fileName + "\", \"" + filePath + "\");' style='cursor:Pointer'>"+ fileName +"</td>";
-                            str += "<td colspan='3'><a href='/board/fileDownload?fileNameKey="+encodeURI(fileNameKey)+"&fileName="+encodeURI(fileName)+"&filePath="+encodeURI(filePath)+"'>" + fileName + "</a></td>";
-                            str += "</tr>";
-                        }
-                    }
-
-                } else {
-
-                    alert("등록된 글이 존재하지 않습니다.");
-                    return;
-                }
-
-                $("#tbody").html(str);
-            }
-
-
-
-
-            // /** 게시판 - 수정 페이지 이동 */
-            // function goUpdateBoard(){
-            // //양식(form)의 값을 가져오거나 값을 설정하는 메소드 board_seq의 값을 가져옴
-            // var boardNo = $("#boardNo").val();
-            //
-            // location.href = "/board/boardUpdate?boardSeq="+ boardSeq;
-            // }
-            //
-            // /** 게시판 - 삭제 페이지 이동 */
-            // function goDeleteBoard(){
-            // //양식(form)의 값을 가져오거나 값을 설정하는 메소드 board_seq의 값을 가져옴
-            // var boardNo = $("#boardNo").val();
-            //
-            //     location.href = "/board/boardUpdate?boardSeq="+ boardSeq;
-            // }
-
-            // /** 게시판 - 답글 페이지 이동 */
-            // function goBoardReply(){
-            //
-            // var boardNo = $("#boardNo").val();
-            //
-            // location.href = "/board/boardReply?boardSeq="+ boardSeq;
-            // }
 
             /** 게시판 - 첨부파일 다운로드 */
             function fileDownload(fileNameKey, fileName, filePath){
@@ -227,245 +226,107 @@
                 }
             }
 
-            /** 게시판 - 상세 조회  콜백 함수 */
-            function getBoardDetailCallback(obj){
+           function getIdentificationForUpdate(){
 
-                var str = "";
-
-                if(obj != null){
-
-                    var boardNo        = obj.boardNo; //게시판 번호
-                    var boardTitle         = obj.boardTitle; //게시판 제목
-                    var boardContent         = obj.boardContent; //게시판 내용
-                    var boardWriteDate         = obj.boardWriteDate; //작성일자
-                    var boardWriteUpdate     = obj.boardWriteUpdate; //새로운 작성일자
-                    var boardDeleted     = obj.boardDeleted; //게시글 지운 것 여부
-                    var boardReadCount     = obj.boardReadCount; //게시글 조회수
-                    var boardPassword         = obj.boardPassword; //게시글 비밀번호
-                    var userName            = obj.userName; //작성자명
-// var insDate         = obj.ins_date;
-// var updUserId         = obj.upd_user_id;
-// var updDate         = obj.upd_date;
-// var files            = obj.files;
-// var filesLen        = files.length;
-
-                    str += "<tr>";
-                    str += "<th>제목</th>";
-                    str += "<td>"+ boardTitle +"</td>";
-                    str += "</tr>";
-
-                    str += "<tr>";
-                    str += "<th>작성자</th>";
-                    str += "<td>"+ userName +"</td>";
-                    str += "<th>작성일시</th>";
-                    str += "<td>"+ boardWriteDate +"</td>";
-                    str += "<th>조회</th>";
-                    str += "<td>"+ boardReadCount +"</td>";
-                    str += "<th>추천</th>";
-                    str += "<td>"+ boardRecommendation +"</td>";
-                    str += "<th>전체 댓글수</th>";
-                    str += "<td>"+ board +"</td>";
-                    str += "</tr>";
-
-                    str += "<tr>";
-                    str += "<th>내용</th>";
-                    str += "<td colspan='3'>"+ boardContent +"</td>";
-                    str += "</tr>";
-
-                    if(filesLen > 0){
-
-                        for(var a=0; a<filesLen; a++){
-
-                            var boardSeq    = files[a].board_seq;
-                            var fileNo         = files[a].file_no;
-                            var fileNameKey = files[a].file_name_key;
-                            var fileName     = files[a].file_name;
-                            var filePath     = files[a].file_path;
-                            var fileSize     = files[a].file_size;
-                            var remark         = files[a].remark;
-                            var delYn         = files[a].del_yn;
-                            var insUserId     = files[a].ins_user_id;
-                            var insDate     = files[a].ins_date;
-                            var updUserId     = files[a].upd_user_id;
-                            var updDate     = files[a].upd_date;
-
-                            str += "<th>첨부파일</th>";
-//str += "<td onclick='javascript:fileDownload(\"" + fileNameKey + "\", \"" + fileName + "\", \"" + filePath + "\");' style='cursor:Pointer'>"+ fileName +"</td>";
-                            str += "<td colspan='3'><a href='/board/fileDownload?fileNameKey="+encodeURI(fileNameKey)+"&fileName="+encodeURI(fileName)+"&filePath="+encodeURI(filePath)+"'>" + fileName + "</a></td>";
-                            str += "</tr>";
-                        }
-                    }
-
-                } else {
-
-                    alert("등록된 글이 존재하지 않습니다.");
-                    return;
-                }
-
-                $("#tbody").html(str);
             }
 
-            // /** 게시판 - 삭제  */
-            // function deleteBoard(){
-            //
-            // var boardSeq = $("#board_seq").val();
-            //
-            // var yn = confirm("게시글을 삭제하시겠습니까?");
-            // if(yn){
-            //
-            // $.ajax({
-            //
-            // url        : "/board/deleteBoard",
-            // data    : $("#boardForm").serialize(),
-            // dataType: "JSON",
-            // cache   : false,
-            // async   : true,
-            // type    : "POST",
-            // success : function(obj) {
-            // deleteBoardCallback(obj);
-            // },
-            // error     : function(xhr, status, error) {}
-            //
-            // });
-            // }
-            // }
+            function getIdentificationForDelete(){
 
-            // /** 게시판 - 삭제 콜백 함수 */
-            // function deleteBoardCallback(obj){
-            //
-            // if(obj != null){
-            //
-            // var result = obj.result;
-            //
-            // if(result == "SUCCESS"){
-            // alert("게시글 삭제를 성공하였습니다.");
-            // goBoardList();
-            // } else {
-            // alert("게시글 삭제를 실패하였습니다.");
-            // return;
-            // }
-            // }
-            // }
+            }
+
+
+
         </script>
     </head>
-
-<body>
-<nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <body id="page_top">
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="#page-top">게시판</a>
+        <a class="navbar-brand" href="/board/boardList">지아의 게시판</a>
         <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             Menu
             <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ms-auto">
-                <!--                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio"></a></li>-->
-                <!--                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">About</a></li>-->
-<!--                <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">게시글 등록</a></li>-->
             </ul>
         </div>
     </div>
 </nav>
-
-<!-- Masthead-->
-<!--<header class="masthead bg-primary text-white text-center">-->
-<!--    <div class="container d-flex align-items-center flex-column">-->
-<!--        &lt;!&ndash; Masthead Avatar Image&ndash;&gt;-->
-<!--        &lt;!&ndash;        <img class="masthead-avatar mb-5" src="assets/img/avataaars.svg" alt="..." />&ndash;&gt;-->
-<!--        &lt;!&ndash; Masthead Heading&ndash;&gt;-->
-<!--        <h1 class="masthead-heading text-uppercase mb-0">게시판 홈페이지에 오신 것을 환영합니다!</h1>-->
-<!--        &lt;!&ndash; Icon Divider&ndash;&gt;-->
-<!--        <div class="divider-custom divider-light">-->
-<!--            <div class="divider-custom-line"></div>-->
-<!--            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>-->
-<!--            <div class="divider-custom-line"></div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</header>-->
-<!-- Portfolio Section-->
-<section class="page-section portfolio" id="portfolio">
-    <div class="container">
-        <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">게시글 조회</h2>
-        <!-- Icon Divider-->
-        <div class="divider-custom">
-            <div class="divider-custom-line"></div>
-            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-            <div class="divider-custom-line"></div>
-        </div>
-    </div>
-</section>
-<article>
-    <div id="wrap">
-        <div id="container">
-            <div class="inner">
-                <!--            <h2>게시글 상세</h2>-->
-                <div class="buttons">
-                    <button type="button" onclick="javascript:goBoardWrite();">게시글 등록</button>
-                    <button type="button" onclick="javascript:getIdentificationForUpdate();">수정</button>
-                    <button type="button" onclick="javascript:getIdentificationForDelete();">삭제</button>
-                </div>
-                <br><br>
-                <form id="boardForm" name="boardForm">
-                    <table>
-                        <thead id="thead">
-                        </thead>
-                        <tbody id="tbody">
-                        </tbody>
-                    </table>
-                    <input type="hidden" id="boardNo"        name="boardNo"    value="${boardNo}"/> <!-- 게시글 번호 -->
-                    <input type="hidden" id="search_type"    name="search_type"     value="S"/> <!-- 조회 타입 - 상세(S)/수정(U) -->
-                </form>
-                <br><br>
-                <button type="button" onclick="javascript:getRecommendation();">추천</button>
-                <button style="color:red" type="button" onclick="javascript:getReport();">신고</button>
-                <br><br>
-                전체 댓글
-                <hr>
-                작성자: <input type="text" name="userName"> &nbsp; 댓글: <textarea name="boardContent" rows="3" cols="50"></textarea>    <input type="file" name="fileNo" id="files" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi" onchange="checkFile(this)"> <br>
-
-                <br>
-                비밀번호: <input type="password" name="userPassword"> &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="submit" value="등록" onclick="alert('동록이 완료되었습니다.')">
-
-                <br><br>
-                <button type="button" onclick="javascript:goBoardList();">목록으로</button>
-                <!--                <button type="button" class="btn black mr5" onclick="javascript:goBoardUpdate();">수정하기</button>-->
-                <!--                <button type="button" class="btn black" onclick="javascript:deleteBoard();">삭제하기</button>-->
-                <!--                <button type="button" class="btn black mr5" onclick="javascript:goBoardReply();">답글쓰기</button>-->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <h1 class="masthead-heading text-uppercase mb-0">게시글 조회</h1>
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
             </div>
         </div>
-    </div>
-    </div>
+</header>
+
+<article class="readpage_article">
+    <section class="readpage_section1" style="text-align: center;">
+        <button class="writeBoard" type="button" onclick="javascript:goBoardWrite();">게시글 등록</button>
+        <button type="button" class="updateBoard" onclick="javascript:getIdentificationForUpdate();">수정</button>
+        <button type="button" class="deleteBoard" onclick="javascript:getIdentificationForDelete();">삭제</button>
+    </section>
+    <br><br>
+
+    <section class="readpage_section2" style="text-align: center;">
+        <div class="readpage_section2_div1" style="font-weight: bold; font-size: large;">Hello</div> &nbsp;
+        <div class="readpage_section2_div2">
+            <span name="userName" style="margin-right: 20px">지아</span>
+            <span name="writeTime" style="margin-right: 20px">2022.02.07 10:00</span>
+            <span name="userName" style="border-right: black;">조회 2</span>
+            <span name="userName" style="margin-right: 5px">추천 3</span>
+            <span name="userName" style="margin-right: 5px">댓글 2</span>
+        </div>
+    </section>
+    <hr style="width: 50%; border-color: #1abc9c; color: #1abc9c">
+    <section class="readpage_section3">
+        <div class="boardContent" style="left: 30px;">안뇽-!</div>
+        <br><Br><br>
+        <div class="section3_buttons">
+            <button type="button" class="recommendationButton" onclick="javascript:getRecommendation()">추천<i class="fas fa-star"></i></button>
+            <button type="button" class="reportButton" onclick="javascript:getReport();">신고<i class="fas fa-exclamation-triangle"></i></button>
+        </div>
+    </section>
+    <section class="readpage_section4">
+    전체 댓글 n개
+    </section>
+    <hr class="hr" style="width: 50%; border-color: #1abc9c; color: #1abc9c">
+    <section class="readpage_section5">
+                <div class="commentSection1">
+                      <div class="createpage_userName_text">
+                        <input type="text" name="userName" value="작성자">
+                          </div>
+                    <div class="createpage_commentPwd_text">
+                        <input type="password" name="commentPassword" value="비밀번호">
+                 </div>
+                    <br>
+                </div>
+
+            <span class="commentSection2">
+                <textarea name="commentContent" rows="3" cols="50" style="border-color: #1abc9c">댓글 내용을 입력해주세요</textarea>
+                 </span>
+
+        <span class="commentSection3">
+            <div class="commentFileUpload">
+                <form method enctype="multipart/form-data">
+                    <input type="file" name="fileNo" style="display: none"/>
+                    <button type="button" class="create_button_files" onclick="checkFile(this)">파일 업로드<i class="fas fa-file-upload"></i></button>
+                </form>
+                </div>
+            <div class="commentUpload">
+                <button type="button" class="commentUpload" onclick="javascript=goCommentWrite();">등록</button>
+            </div>
+        </span>
+    </section>
+
+    <secion class="readpage_section6">
+        <br><br>
+        <button type="button" class="goBoardList" onclick="javascript:goBoardList();">목록</button>
+    </secion>
+
 </article>
-<!--<body>-->
-<!--<h1>게시글 조회</h1>-->
-<!--<form action="createpage.html" method="post">-->
-<!--<input type="submit" value="게시글 등록">-->
-<!--</form>-->
-<!--<form action="identificationpage.html" method="get">-->
-<!--<input type="submit" value="수정"><input type="submit" value="삭제">-->
-<!--</form>-->
-<!--제목:-->
-<!--<br>-->
-<!--작성자: &nbsp; 작성일자: &nbsp; 조회수: &nbsp; 추천수: &nbsp; 댓글수: &nbsp; <br>-->
-<!--<hr>-->
-<!--내용:-->
-<!--<br><br><br><br><br>-->
-<!--<input type="submit" value="추천" onclick="alert('추천이 완료되었습니다.')">-->
-<!--<input type="submit" value="신고" onclick="alert('신고가 완료되었습니다.')">-->
-<!--<hr>-->
-<!--전체 댓글-->
-<!--<hr>-->
-<!--작성자: <input type="text" name="userName"> &nbsp; 댓글: <textarea name="boardContent" rows="3" cols="50"></textarea>    <input type="file" name="fileNo" id="files" accept="image/png, image/jpg, image/jpeg, image/gif, video/mp4, video/avi" onchange="checkFile(this)"> <br>-->
-
-<!--<br>-->
-<!--비밀번호: <input type="password" name="userPassword"> 등록: <input type="submit" value="등록" onclick="alert('동록이 완료되었습니다.')">-->
-<!--<form action="mainpage.html" method="get">-->
-<!--<input type="submit" value="목록">-->
-<!--</form>-->
-
-<!--</body>-->
-</body>
 </body>
 </html>

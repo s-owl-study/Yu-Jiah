@@ -179,7 +179,7 @@
 
         .create_button_cancel {
             background-color: #1abc9c;
-            color: black;
+            color: red;
             font-weight: bold;
             font-family: 'Gowun Dodum', sans-serif;
             border-style: none;
@@ -195,6 +195,21 @@
             border-style: none;
             margin: 10px;
             border-radius: 5px;
+        }
+
+        .create_section1_div1{
+            position: relative;
+            right: 210px;
+        }
+
+        .create_section1_div2{
+            position: relative;
+            right: 290px;
+        }
+
+        .create_section3 {
+            position: relative;
+            right: 315px;
         }
     </style>
 </head>
@@ -226,15 +241,21 @@
 <br>
 
 <article>
+
+
     <section class="create_section1">
-                <input type="text" class="userName" value="작성자"> &nbsp; <input type="password" class="userPassword" value="비밀번호">
-                <br><br>
-                <input type="text" class="boardTitle" value="제목을 입력해주세요.">
+        <div class="create_section1_div1">
+                <input style="border-color: #1abc9c; border-width: 3px;" type="text" name="userName" id="userName" value="작성자"> &nbsp; <input style="border-color: #1abc9c; border-width: 3px;" type="password" class="userPassword" value="비밀번호">
+        </div>
+        <br>
+        <div class="create_section1_div2">
+                <input style="border-color: #1abc9c; border-width: 3px;" type="text" name="boardTitle" id="boardTitle" value="제목을 입력해주세요.">
+        </div>
     </section>
 
     <section class="create_section2">
                 <br><br>
-                <textarea class="boardContent" rows="30" cols="100">내용을 입력해주세요.</textarea>
+                <textarea style="border-color: #1abc9c; border-width: 3px" name="boardContent" id="boardContent" rows="30" cols="100">내용을 입력해주세요.</textarea>
     </section>
 
                 <br><br>
