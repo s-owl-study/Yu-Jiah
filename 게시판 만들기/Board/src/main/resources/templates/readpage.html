@@ -21,9 +21,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 
         <style>
-
-            .readpage_article {
-                font-size: large;
+            .readpage_article{
                 font-family: 'Gowun Dodum', sans-serif;
             }
             .writeBoard {
@@ -76,7 +74,7 @@
                 border-radius: 5px;
             }
 
-            .commentFileUpload {
+            .create_button_files {
                 background-color: #1abc9c;
                 color: black;
                 font-weight: bold;
@@ -92,6 +90,7 @@
                 font-weight: bold;
                 font-family: 'Gowun Dodum', sans-serif;
                 border-style: none;
+                margin: 10px;
                 border-radius: 5px;
             }
 
@@ -125,14 +124,34 @@
                 text-align: center;
             }
 
-            .hr {
+            .readpage_hr {
+                text-align: center;
+                position: relative;
+            }
+
+            /*.readpage_section4{*/
+            /*    position: relative;*/
+            /*    right: 250px;*/
+            /*}*/
+
+            .readpage_section1{
+                position: relative;
+                left: 270px;
+                border-color: #1abc9c;
+                border-width: 3px;
+            }
+
+            /*.readpage_section5 {*/
+            /*    text-align: center;*/
+            /*}*/
+
+            .readpage_section6 {
                 text-align: center;
             }
 
-            .readpage_article{
+            .readpage_article {
                 text-align: center;
             }
-
         </style>
 
         <script>
@@ -157,9 +176,20 @@
                 return alert("게시글을 신고하였습니다.");
             }
 
+            /**게시판 등록 이동**/
+            function goBoardWrite(){
+                location.href = "/board/createBoard";
+            }
+
             /** 게시판 - 목록 페이지 이동 */
             function goBoardList(){
                 location.href = "/board/boardList";
+            }
+
+            /**댓글 쓰기 화면**/
+            function goCommentWrite(){
+                alert("댓글이 등록되었습니다.")
+                location.href = "/board/addComment";
             }
 
             /** 댓글 - 댓글 조회 **/
@@ -226,13 +256,38 @@
                 }
             }
 
-           function getIdentificationForUpdate(){
-
-            }
+           function getIdentificationForUpdate() {
+               prompt("비밀 번호를 입력해주세요", "");
+               if (confirm("게시글을 수정하시겠습니까?")) {
+                   {
+                       alert("게시글 수정 페이지로 이동합니다.");
+                       goBoardUpdate();
+                   }
+               }
+           }
 
             function getIdentificationForDelete(){
-
+                prompt("비밀 번호를 입력해주세요", "");
+                if (confirm("게시글을 삭제하시겠습니까?")) {
+                    {
+                        alert("게시글을 삭제합니다.");
+                        goBoardList();
+                    }
+                }
             }
+
+            function goBoardUpdate(){
+                location.href = "/board/updateBoard";
+            }
+
+            function goX() {
+                if (confirm("댓글을 삭제하시겠습니까?")) {
+                    {
+                        alert("댓글을 삭제하였습니다.");
+                    }
+                }
+            }
+
 
 
 
@@ -265,25 +320,28 @@
 
 <article class="readpage_article">
     <section class="readpage_section1" style="text-align: center;">
-        <button class="writeBoard" type="button" onclick="javascript:goBoardWrite();">게시글 등록</button>
+        <button class="writeBoard" type="button" onclick="javascript:goBoardWrite();">게시글 등록<i class="fas fa-pen"></i></button>
         <button type="button" class="updateBoard" onclick="javascript:getIdentificationForUpdate();">수정</button>
-        <button type="button" class="deleteBoard" onclick="javascript:getIdentificationForDelete();">삭제</button>
+        <button type="button" class="deleteBoard" onclick="javascript:getIdentificationForDelete();">삭제<i class="fas fa-times"></i></button>
     </section>
     <br><br>
 
     <section class="readpage_section2" style="text-align: center;">
-        <div class="readpage_section2_div1" style="font-weight: bold; font-size: large;">Hello</div> &nbsp;
+        <div class="readpage_section2_div1" style="font-weight: bold; font-size: large; position: relative; right: 320px;"><strong>Hello</strong></div> &nbsp;
         <div class="readpage_section2_div2">
-            <span name="userName" style="margin-right: 20px">지아</span>
-            <span name="writeTime" style="margin-right: 20px">2022.02.07 10:00</span>
+            <span name="userName" style="margin-right: 20px;">지아</span>
+            <span name="writeTime" style="margin-right: 20px; position: relative; left: 150px;">2022.02.07 10:00</span>
+            <span style="position: relative; left: 320px;">
             <span name="userName" style="border-right: black;">조회 2</span>
             <span name="userName" style="margin-right: 5px">추천 3</span>
             <span name="userName" style="margin-right: 5px">댓글 2</span>
+            </span>
         </div>
     </section>
-    <hr style="width: 50%; border-color: #1abc9c; color: #1abc9c">
+    <hr style=" width: 50%; text-align: center; border: solid 3px #1abc9c; background-color: #1abc9c; border-width: 3px; position: relative; left: 500px;">
     <section class="readpage_section3">
-        <div class="boardContent" style="left: 30px;">안뇽-!</div>
+        <div class="boardContent" style="position:relative; right: 300px; border: 3px;">안뇽-!
+        </div>
         <br><Br><br>
         <div class="section3_buttons">
             <button type="button" class="recommendationButton" onclick="javascript:getRecommendation()">추천<i class="fas fa-star"></i></button>
@@ -291,42 +349,40 @@
         </div>
     </section>
     <section class="readpage_section4">
-    전체 댓글 n개
+    <span style="position: relative; right: 300px;">전체 댓글 <span style="color: red; font-weight: bold;">2개</span></span>
+        <hr style="width: 50%; text-align: center; border: solid 3px #1abc9c; background-color: #1abc9c; position: relative; left: 500px;">
     </section>
-    <hr class="hr" style="width: 50%; border-color: #1abc9c; color: #1abc9c">
-    <section class="readpage_section5">
-                <div class="commentSection1">
-                      <div class="createpage_userName_text">
-                        <input type="text" name="userName" value="작성자">
-                          </div>
-                    <div class="createpage_commentPwd_text">
-                        <input type="password" name="commentPassword" value="비밀번호">
-                 </div>
+        <span name="userName" style="position: relative; right: 200px;">지아유</span>
+        <span name="writeTime" style="margin-right: 20px; position: relative; right: 80px;">ㅎㅇㅎㅇ</span>
+    <span style="position: relative; left: 200px;">2022.02.09 13:00 <span style="color: red; font-weight: bold;">✕</span></span>
+    <br>
+    <span name="userName" style="position: relative; right: 180px;"><span style="color: #1abc9c; font-weight: bold;">ㄴ</span> 지아</span>
+    <span name="writeTime" style="margin-right: 20px; position: relative; right: 55px;">하이</span>
+    <span style="position: relative; left: 245px;">2022.02.09 13:05 <span style="color: red; font-weight: bold;" onclick="javascript=goX();">✕</span>
+    </span>
+    <br><br>
+    <section class="readpage_section5" style="display: flex;">
+        <section class="userName&PWD" style="position: relative; left: 450px;">
+                        <input style="border-color: #1abc9c; border-width: 3px; left: 500px;" type="text" name="userName" value="작성자">
                     <br>
-                </div>
-
+                        <input type="password"  style="border-color: #1abc9c; border-width: 3px;" name="commentPassword" value="비밀번호">
+                    <br>
+        </section>
             <span class="commentSection2">
-                <textarea name="commentContent" rows="3" cols="50" style="border-color: #1abc9c">댓글 내용을 입력해주세요</textarea>
+                <textarea name="commentContent" rows="3" cols="70" style="border-color: #1abc9c; border-width: 3px; position: relative; left:530px;">댓글 내용을 입력해주세요</textarea>
                  </span>
 
-        <span class="commentSection3">
-            <div class="commentFileUpload">
-                <form method enctype="multipart/form-data">
-                    <input type="file" name="fileNo" style="display: none"/>
-                    <button type="button" class="create_button_files" onclick="checkFile(this)">파일 업로드<i class="fas fa-file-upload"></i></button>
-                </form>
-                </div>
-            <div class="commentUpload">
-                <button type="button" class="commentUpload" onclick="javascript=goCommentWrite();">등록</button>
-            </div>
+        <span class="commentSection3" style="position: relative; left: 600px;">
+<!--            <div style="position: relative; left: 300px; bottom: 150px">-->
+            <button type="button" class="create_button_files"  onclick="checkFile(this)">파일 업로드<i class="fas fa-file-upload"></i></button>
+                <br>
+            <button type="button" class="commentUpload" onclick="javascript=goCommentWrite();">댓글 등록<i class="fas fa-upload"></i></button>
+<!--            </div>-->
         </span>
     </section>
-
-    <secion class="readpage_section6">
-        <br><br>
-        <button type="button" class="goBoardList" onclick="javascript:goBoardList();">목록</button>
+    <secion class="readpage_section6" style="text-align: center;">
+        <button type="button" style="text-align: center; position: center;" class="goBoardList" onclick="javascript:goBoardList();">목록</button>
     </secion>
-
 </article>
 </body>
 </html>
